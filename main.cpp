@@ -1,4 +1,4 @@
-/*
+/**
  * @brief Program starting point
  * @author Wolfram Rösler <wolfram@roesler-ac.de>
  * @date 2017-02-12
