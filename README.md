@@ -79,7 +79,7 @@ Version 1.0-3-g5c4af1f-dirty (built 2018-01-08 19:32:17 by wolfram on MacBook-Ai
 
 ... like time stamp, machine/computer name, etc.
 
-This is accomplished by a shell script, `makeversion.sh`, which uses simple shell tools like `date`, `uname`, etc. (and, of course, `git describe`) to construct the version identifier. The script outputs its result as a C/C++ function that returns the version string.
+This is accomplished by a shell script, `makeversion.sh`, which uses simple shell tools like `date`, `uname`, etc. (and, of course, `git describe`) to construct the version identifier. The script outputs its result as a C function that returns the version string.
 
 ```sh
 $ bash makeversion.sh
@@ -100,7 +100,7 @@ The C string that contains the version identifier begins with the "magic string"
 
 This is where the actual magic happens.
 
-When invoked with the `-o` parameter, `makeversion.sh` compiles its C/C++ output into an object file. The cmake file uses `add_custom_command` to invoke `makeversion.sh -o` during each build, and contains the resulting object file in its `target_link_libraries`.
+When invoked with the `-o` parameter, `makeversion.sh` compiles its C output into an object file. The cmake file uses `add_custom_command` to invoke `makeversion.sh -o` during each build, and contains the resulting object file in its `target_link_libraries`.
 
 This is done as a "pre link" step, i. e. only when there's actual work to do. Simply typing `make` again (without any source change, `make clean`, etc.) won't trigger a new link and thus won't create a new version number.
 
