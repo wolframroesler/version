@@ -7,8 +7,7 @@
 if [ $# = 2 -a "$1" = "-o" ];then
 
     # Called with -o: Create a .o file with the version number
-    CPP=$(dirname "$2")/$(basename "$2" .o).cpp
-    bash $0 >$CPP && ${CMAKE_CXX_COMPILER:-c++} -c $CPP -o "$2"
+    bash $0 | ${CMAKE_CXX_COMPILER:-c++} -x c++ -c - -o "$2"
     exit
 
 elif [ $# != 0 ];then
