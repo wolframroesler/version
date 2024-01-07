@@ -14,10 +14,10 @@ jobs:
       - name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
         with:
-          path: path/to/file.js
+          path: version.h
           write-mode: overwrite
           contents: |
-            console.log('some contents')
+            const char* getVersion() {return "1.0.4";}
             
       - name: Commit & Push
         uses: Andro999b/push@v1.3
