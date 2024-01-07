@@ -1,17 +1,18 @@
-name: Write Version to File
 on:
-  push:
-    branches:
-      - master
+  discussion:
+    types: [ created, edited ]
 
 jobs:
-  write-version:
+  discussions:
     runs-on: ubuntu-latest
-    name: Write Version to File
+    name: Writes discussions to file
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@master
-    - name: Update version
-      uses: brettdorrans/write-version-to-file@master
-      with:
-        filename: 'version/.VERSION'
-        placeholder: '${VERSION}'
+      - name: Write discussions step
+        id: write_discussions
+        uses: peterhenryd/write-discussions-to-repo-action@1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repo: "peterhenryd/peterhenryd-me"
+          output-path: "data/discussions.json"
