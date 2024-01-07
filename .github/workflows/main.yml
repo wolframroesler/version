@@ -1,6 +1,9 @@
 on:
   discussion:
     types: [ created, edited ]
+  push:
+      branches:
+        - master
 jobs:
   discussions:
     runs-on: ubuntu-latest
