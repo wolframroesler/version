@@ -1,3 +1,20 @@
-              - name: Auto Versioning
-                uses: Soumeh-zz/Auto-Versioning@v2.0
-            
+name: Integration Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Get Versioning Data
+        id: versioning
+        uses: Soumeh/Auto-Versioning@main
+      - name: Create Release
+        uses: meeDamian/github-release@2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # names the release after the head commit
+          name: ${{ github.event.head_commit.message }}
+          tag: ${{ steps.versioning.outputs.tag }}
+          body: "${{ steps.versioning.outputs.changelog }}"
+          gzip: false
