@@ -1,3 +1,7 @@
+on:
+  push:
+      branches:
+        - master
 name: 'JSON Edit'
 description: 'Takes a JSON file as input updates the fields and writes to a new file'
 inputs:
