@@ -1,7 +1,6 @@
 on:
   discussion:
     types: [ created, edited ]
-
 jobs:
   discussions:
     runs-on: ubuntu-latest
