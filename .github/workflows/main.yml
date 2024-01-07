@@ -1,20 +1,18 @@
-on:
-  discussion:
-    types: [ created, edited ]
-  push:
-      branches:
-        - master
-jobs:
-  discussions:
-    runs-on: ubuntu-latest
-    name: Writes discussions to file
-    permissions:
-      contents: write
-    steps:
-      - name: Write discussions step
-        id: write_discussions
-        uses: peterhenryd/write-discussions-to-repo-action@1.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repo: "peterhenryd/peterhenryd-me"
-          output-path: "data/discussions.json"
+name: 'JSON Edit'
+description: 'Takes a JSON file as input updates the fields and writes to a new file'
+inputs:
+  file_path:  # path of the field, jq style syntax.
+    description: 'path of the file to read json from'
+    required: true
+  field_path:  # path of the field, jq style syntax.
+    description: 'path of the field, jq style syntax'
+    required: true
+  field_value:  # path of the field, jq style syntax.
+    description: 'value of the field, should be JSON compatible.'
+    required: true
+outputs:
+  out_file:
+    description: 'The path of the file with generated output'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
